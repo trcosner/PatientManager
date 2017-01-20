@@ -12,6 +12,7 @@ class App extends Component{
         selectedPatient: undefined
       };
       this._onChange = this._onChange.bind(this);
+      this._addPatient = this._onChange.bind(this);
   }
 
   componentDidMount(){
@@ -26,6 +27,7 @@ class App extends Component{
   _onChange(){
     this.setState({patients: patientStore.getPatients()});
     this.setState({selectedPatient: patientStore.getSelectedPatient()});
+    console.log(this.state.selectedPatient);
   }
 
   _getPatientById(id){
@@ -33,6 +35,8 @@ class App extends Component{
   }
 
   _addPatient(){
+    var newPatient = JSON.parse(Json.stringify(this.state.selectedPatient));
+    delete newPatient.
     patientActions.addPatient();
   }
 

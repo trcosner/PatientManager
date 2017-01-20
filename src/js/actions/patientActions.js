@@ -23,7 +23,7 @@ const patientActions = {
         });
       });
   },
-  addPatient(){
+  addPatient(model){
     AppDispatcher.handlection({
       actionType: patientConstants.ADD_PATIENT
     });
