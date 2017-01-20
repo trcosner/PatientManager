@@ -5,6 +5,10 @@ const patientApi = {
   getPatients() {
     return request
       .get('https://izenda.herokuapp.com/patients/')
+  },
+  getPatient(id) {
+    return request
+      .get('https://izenda.herokuapp.com/patients/' + id)
   }
 };
 

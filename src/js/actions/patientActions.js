@@ -9,17 +9,19 @@ const patientActions = {
       .then(function (patients){
         AppDispatcher.handleAction({
           actionType: patientConstants.GET_PATIENTS,
-          patients: patients
+          patients: patients.body
         });
-      })
-    AppDispatcher.handleAction({
-      actionType: patientConstants.GET_PATIENTS,
-    });
+      });
   },
-  getPatient(response){
-    AppDispatcher.handleAction({
-      actionType: patientConstants.GET_PATIENT,
-    })
+  getPatient(id){
+    patientApi
+      .getPatient(id)
+      .then(function (patient){
+        AppDispatcher.handleAction({
+          actionType: patientConstants.GET_PATIENT,
+          patient: patient.body
+        });
+      });
   },
   addPatient(){
     AppDispatcher.handlection({
