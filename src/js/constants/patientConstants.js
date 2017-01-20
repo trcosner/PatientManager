@@ -1,0 +1,9 @@
+const patientConstants = {
+  GET_PATIENTS: 'GET_PATIENTS',
+  GET_PATIENT: 'GET_PATIENT',
+  ADD_PATIENT: 'ADD_PATIENT',
+  UPDATE_PATIENT: 'UPDATE_PATIENT',
+  REMOVE_PATIENT: 'REMOVE_PATIENT',
+};
+
+export default patientConstants;
