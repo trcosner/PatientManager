@@ -13,6 +13,16 @@ const patientActions = {
         });
       });
   },
+  getPatient(id){
+    patientApi
+      .getPatients(id)
+      .then(function (patient){
+        AppDispatcher.handleAction({
+          actionType: patientConstants.GET_PATIENT,
+          patient: patient.body
+        });
+      });
+  },
   postPatient(model){
     patientApi
       .postPatient(model)

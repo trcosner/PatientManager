@@ -3,14 +3,19 @@ import request from 'superagent';
 import noCache from 'superagent-no-cache'
 
 const patientApi = {
-  getPatients() {
+  getPatients(id) {
+    if(id){
+      return request
+        .get('https://izenda.herokuapp.com/patients/' + id)
+        .use(noCache)
+    }
     return request
       .get('https://izenda.herokuapp.com/patients/')
       .use(noCache)
   },
   postPatient(model){
-    //not PUT so sharing POST endpoint for add and update
-    //if no id then adds
+    //getting 404 on PUT method for adding new patients 
+    //so I ran add and edit on POST
     return request
       .post('https://izenda.herokuapp.com/patients')
       .set('Content-Type', 'application/json')

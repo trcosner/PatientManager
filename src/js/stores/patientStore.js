@@ -8,11 +8,16 @@ import {EventEmitter} from 'events';
 const CHANGE_EVENT = 'change';
 
 var _store = {
-  patients: []
+  patients: [],
+  selectedPatient: {}
 }
 
 function setPatients(patients){
   _store.patients = patients;
+}
+
+function setSelectedPatient(patient){
+  _store.selectedPatient = patient;
 }
 
 const patientStore = objectAssign({}, EventEmitter.prototype, {
@@ -25,9 +30,8 @@ const patientStore = objectAssign({}, EventEmitter.prototype, {
   getPatients(){
     return _store.patients;
   },
-  getPatient(id){
-    let index = _store.patients.map(function(patient){return patient.id}).indexOf(id);
-    return index > -1 ? _store.patients[index] : [];
+  getSelectedPatient(){
+    return  _store.selectedPatient;
   }
 });
 
@@ -40,6 +44,11 @@ AppDispatcher.register(function(payload){
       setPatients(action.patients);
       patientStore.emit(CHANGE_EVENT);
       break
+
+    case patientConstants.GET_PATIENT:
+      setSelectedPatient(action.patient);
+      patientStore.emit(CHANGE_EVENT);
+      break;
 
     case patientConstants.POST_PATIENT:
       patientActions.getPatients();
