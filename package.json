@@ -9,16 +9,19 @@
   "author": "Tyler Cosner",
   "license": "MIT",
   "dependencies": {
+    "component-ie": "^1.0.0",
     "css-loader": "^0.26.1",
     "elemental": "^0.6.1",
     "flux": "^2.1.1",
+    "ie": "^0.1.0",
     "keymirror": "^0.1.1",
     "object-assign": "^4.1.0",
     "react": "^15.1.0",
     "react-addons-css-transition-group": "^15.4.1",
     "react-dom": "^15.1.0",
     "style-loader": "^0.13.1",
-    "superagent": "^3.3.2"
+    "superagent": "^3.3.2",
+    "superagent-no-cache": "^0.1.0"
   },
   "devDependencies": {
     "babel-core": "^6.1.2",

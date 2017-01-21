@@ -23,5 +23,10 @@ module.exports = {
         loader: "style-loader!css-loader"
       }
     ]
+  },
+  resolve: {
+    alias: {
+      'ie': 'component-ie'
+    }
   }
 };

@@ -8,11 +8,10 @@ class App extends Component{
       super(props);
 
       this.state = {
-        patients: [],
-        selectedPatient: undefined
+        patients: []
       };
       this._onChange = this._onChange.bind(this);
-      this._addPatient = this._onChange.bind(this);
+      this._addPatient = this._addPatient.bind(this);
   }
 
   componentDidMount(){
@@ -26,21 +25,28 @@ class App extends Component{
 
   _onChange(){
     this.setState({patients: patientStore.getPatients()});
-    this.setState({selectedPatient: patientStore.getSelectedPatient()});
-    console.log(this.state.selectedPatient);
+    console.log(this.state.patients);
   }
 
   _getPatientById(id){
-    patientActions.getPatient(id);
+    return patientStore.getPatient(id);
   }
 
   _addPatient(){
-    var newPatient = JSON.parse(Json.stringify(this.state.selectedPatient));
-    delete newPatient.
-    patientActions.addPatient();
+    let patient = JSON.parse(JSON.stringify(this._getPatientById(5)));
+    delete patient.id;
+    patientActions.postPatient(patient);
   }
 
-  _addPatient
+  _updatePatient(){
+    let patient = JSON.parse(JSON.stringify(this._getPatientById(1012)));
+    patient.first_name = 'Tyler'
+    patientActions.postPatient(patient);
+  }
+
+  _removePatient(id){
+    patientActions.removePatient(id);
+  }
 
   render(){
     return(
@@ -50,6 +56,12 @@ class App extends Component{
         </div>
         <div onClick={() => {this._addPatient()}}>
           Add Patient
+        </div>
+        <div onClick={() => {this._updatePatient()}}>
+          Update Patient
+        </div>
+        <div onClick={() => {this._removePatient(1011)}}>
+          Remove Patient
         </div>
       </div>
 

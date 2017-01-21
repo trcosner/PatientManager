@@ -13,32 +13,23 @@ const patientActions = {
         });
       });
   },
-  getPatient(id){
+  postPatient(model){
     patientApi
-      .getPatient(id)
-      .then(function (patient){
+      .postPatient(model)
+      .then(function (){
         AppDispatcher.handleAction({
-          actionType: patientConstants.GET_PATIENT,
-          patient: patient.body
+          actionType: patientConstants.POST_PATIENT,
         });
       });
   },
-  addPatient(model){
-    AppDispatcher.handlection({
-      actionType: patientConstants.ADD_PATIENT
-    });
-  },
-  updatePatient(model){
-    AppDispatcher.handleAction({
-      actionType: patientConstants.UPDATE_APPOINTMENT,
-      data: model
-    })
-  },
   removePatient(id){
-    AppDispatcher.handleAction({
-      actionType: patientConstants.REMOVE_PATIENT,
-      id: id
-    })
+    patientApi
+      .removePatient(id)
+      .then(function(){
+        AppDispatcher.handleAction({
+          actionType: patientConstants.REMOVE_PATIENT,
+        });
+      });
   }
 };
 

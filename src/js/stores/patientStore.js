@@ -2,21 +2,17 @@ import AppDispatcher from '../dispatcher/AppDispatcher';
 import patientConstants from '../constants/patientConstants';
 import objectAssign from 'object-assign';
 import patientApi from '../api/patientApi';
+import patientActions from '../actions/patientActions';
 import {EventEmitter} from 'events';
 
 const CHANGE_EVENT = 'change';
 
 var _store = {
-  patients: [],
-  selectedPatient: undefined
+  patients: []
 }
 
 function setPatients(patients){
   _store.patients = patients;
-}
-
-function setSelectedPatient(patient){
-  _store.selectedPatient = patient;
 }
 
 const patientStore = objectAssign({}, EventEmitter.prototype, {
@@ -29,8 +25,9 @@ const patientStore = objectAssign({}, EventEmitter.prototype, {
   getPatients(){
     return _store.patients;
   },
-  getSelectedPatient(){
-    return _store.selectedPatient;
+  getPatient(id){
+    let index = _store.patients.map(function(patient){return patient.id}).indexOf(id);
+    return index > -1 ? _store.patients[index] : [];
   }
 });
 
@@ -44,24 +41,12 @@ AppDispatcher.register(function(payload){
       patientStore.emit(CHANGE_EVENT);
       break
 
-    case patientConstants.GET_PATIENT:
-      setSelectedPatient(action.patient);
-      patientStore.emit(CHANGE_EVENT);
-      break
-
-    case patientConstants.UPDATE_PATIENT:
-      updatePatient(action.data);
-      patientStore.emit(CHANGE_EVENT);
-      break;
-
-    case patientConstants.ADD_PATIENT:
-      addPatient(action.data);
-      patientStore.emit(CHANGE_EVENT);
+    case patientConstants.POST_PATIENT:
+      patientActions.getPatients();
       break;
 
     case patientConstants.REMOVE_PATIENT:
-      removePatient(action.data);
-      patientStore.emit(CHANGE_EVENT);
+      patientActions.getPatients();
       break;
 
     default:
