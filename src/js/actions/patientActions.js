@@ -3,9 +3,9 @@ import patientConstants from '../constants/patientConstants';
 import patientApi from '../api/patientApi'
 
 const patientActions = {
-  getPatients(){
+  getPatients(page){
     patientApi
-      .getPatients()
+      .getPatients(page)
       .then(function (patients){
         AppDispatcher.handleAction({
           actionType: patientConstants.GET_PATIENTS,
@@ -15,7 +15,7 @@ const patientActions = {
   },
   getPatient(id){
     patientApi
-      .getPatients(id)
+      .getPatient(id)
       .then(function (patient){
         AppDispatcher.handleAction({
           actionType: patientConstants.GET_PATIENT,

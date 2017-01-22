@@ -13,7 +13,7 @@ var _store = {
 }
 
 function setPatients(patients){
-  _store.patients = patients;
+  _store.patients = _store.patients.concat(patients);
 }
 
 function setSelectedPatient(patient){
