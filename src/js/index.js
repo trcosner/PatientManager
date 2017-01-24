@@ -3,7 +3,8 @@ import ReactDOM from 'react-dom';
 import App from './components/app';
 import EditPatient from './components/editPatient';
 import NewPatient from './components/newPatient';
-import { Router, Route, hashHistory } from 'react-router'
+import { Router, Route, hashHistory } from 'react-router';
+import '../less/app.less';
 
 
 ReactDOM.render((

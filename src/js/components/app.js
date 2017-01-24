@@ -9,7 +9,7 @@ class App extends Component{
   render(){
     return(
       <div>
-        <Link to="new/">+ New Patient</Link>
+        <Link to="new/"><span className="box">+ New Patient</span></Link>
         <PatientList/>
       </div>
     )
