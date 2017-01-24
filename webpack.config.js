@@ -21,10 +21,15 @@ module.exports = {
       },
       { test: /\.css$/,
         loader: "style-loader!css-loader"
+      },
+      {
+        test: /\.less$/,
+        loader: "style!css!less"
       }
     ]
   },
   resolve: {
+    extensions: ['', '.scss', '.css', '.js', '.json'],
     alias: {
       'ie': 'component-ie'
     }

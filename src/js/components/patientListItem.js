@@ -1,4 +1,6 @@
 import React, {Component} from 'react';
+import patientStore from '../stores/patientStore';
+import patientActions from '../actions/patientActions';
 import { Link } from 'react-router';
 
 class PatientListItem extends Component{
@@ -6,7 +8,7 @@ class PatientListItem extends Component{
     return(
       <div>
       <Link to={"edit/" + this.props.patient.id}>
-        {this.props.patient.first_name}
+        <span>{this.props.patient.first_name}</span>
       </Link>
       </div>
     );

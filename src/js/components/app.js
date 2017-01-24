@@ -6,8 +6,6 @@ import { Link } from 'react-router';
 
 class App extends Component{
 
-
-
   render(){
     return(
       <div>

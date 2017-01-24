@@ -23,16 +23,27 @@ const patientActions = {
         });
       });
   },
-  postPatient(model){
+  updatePatient(model){
     patientApi
-      .postPatient(model)
-      .then(function (){
+      .updatePatient(model)
+      .then(function (patient){
         AppDispatcher.handleAction({
-          actionType: patientConstants.POST_PATIENT,
+          actionType: patientConstants.UPDATE_PATIENT,
+          patient: patient
+        });
+      });
+  },
+  addPatient(model){
+    patientApi
+      .addPatient(model)
+      .then(function(){
+        AppDispatcher.handleAction({
+          actionType: patientConstants.ADD_PATIENT
         });
       });
   },
   removePatient(id){
+    let patientId = id;
     patientApi
       .removePatient(id)
       .then(function(){

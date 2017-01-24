@@ -13,7 +13,12 @@ var _store = {
 }
 
 function setPatients(patients){
-  _store.patients = _store.patients.concat(patients);
+  let existing =_store.patients.filter(function(patient){
+    return patients.map(function(ele){return ele.id;}).indexOf(patient.id) === -1;
+  })
+  _store.patients = existing.concat(patients).sort(function(a,b){
+    return a.id - b.id;
+  });
 }
 
 function setSelectedPatient(patient){
@@ -32,6 +37,16 @@ const patientStore = objectAssign({}, EventEmitter.prototype, {
   },
   getSelectedPatient(){
     return  _store.selectedPatient;
+  },
+  updatePatient(patient){
+      let index = _store.patients.map(function(patient){return patient.id;}).indexOf(patient.id);
+      if(index === -1){return;}
+      _store.patients.splice(index, 1, patient);
+  },
+  removePatient(id){
+    let index = _store.patients.map(function(patient){return patient.id;}).indexOf(id);
+    if(index === -1){return;}
+    _store.patients.splice(index, 1);
   }
 });
 
@@ -50,12 +65,17 @@ AppDispatcher.register(function(payload){
       patientStore.emit(CHANGE_EVENT);
       break;
 
-    case patientConstants.POST_PATIENT:
-      patientActions.getPatients();
+    case patientConstants.ADD_PATIENT:
+      break;
+
+    case patientConstants.UPDATE_PATIENT:
+      setSelectedPatient('');
+      patientStore.updatePatient(action.patient.body);
+      patientStore.emit(CHANGE_EVENT);
       break;
 
     case patientConstants.REMOVE_PATIENT:
-      patientActions.getPatients();
+      patientStore.emit(CHANGE_EVENT)
       break;
 
     default:

@@ -15,12 +15,14 @@ const patientApi = {
         .get('https://izenda.herokuapp.com/patients/' + id)
         .use(noCache)
   },
-  postPatient(model){
-    //getting 404 on PUT method for adding new patients
-    //so I ran add and edit on POST
+  updatePatient(model){
     return request
-      .post('https://izenda.herokuapp.com/patients')
-      .set('Content-Type', 'application/json')
+      .put('https://izenda.herokuapp.com/patients/' + model.id)
+      .send(model)
+  },
+  addPatient(model){
+    return request
+      .post('https://izenda.herokuapp.com/patients/')
       .send(model)
   },
   removePatient(id){

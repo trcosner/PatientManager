@@ -16,7 +16,6 @@ class PatientList extends Component {
       };
       this._onChange = this._onChange.bind(this);
       this._scroll = this._scroll.bind(this);
-      this._addPatient = this._addPatient.bind(this);
   }
 
   componentDidMount(){
@@ -30,34 +29,24 @@ class PatientList extends Component {
 
   _onChange(){
     this.setState({patients: patientStore.getPatients()})
-    console.log(this.state.patients);
     let listItems = this.state.patients.map(function(patient, index) {
       return (
-        <PatientListItem key={patient.id.toString()} patient={patient} />
+        <PatientListItem key={index.toString()} patient={patient} />
       );
     });
     this.setState({patientList: listItems})
   }
 
   _scroll(){
-    console.log('scrolling');
-    this.setState({isInfiniteLoading: true});
-    setTimeout(function() {
-      let nextPage = this.state.page + 1;
-      this.setState({page: nextPage});
-      patientActions.getPatients(this.state.page);
-      this.setState({isInfiniteLoading: false})
-    }.bind(this),1000);
-  }
-
-  _addPatient(){
-    let patient = JSON.parse(JSON.stringify(this._getPatientById(5)));
-    delete patient.id;
-    patientActions.postPatient(patient);
-  }
-
-  _removePatient(id){
-    patientActions.removePatient(id);
+    if(this.refs.patientList){
+      this.setState({isInfiniteLoading: true});
+      setTimeout(function() {
+        let nextPage = this.state.page + 1;
+        this.setState({page: nextPage});
+        patientActions.getPatients(this.state.page);
+        this.setState({isInfiniteLoading: false})
+      }.bind(this),500);
+    }
   }
 
   _elementInfiniteLoad() {
@@ -74,7 +63,7 @@ class PatientList extends Component {
       }
     }
     return (
-      <div style={styles.container}>
+      <div style={styles.container} ref='patientList'>
         <Infinite
           elementHeight={10}
           containerHeight={200}
