@@ -31,7 +31,7 @@ class PatientList extends Component {
     this.setState({patients: patientStore.getPatients()})
     let listItems = this.state.patients.map(function(patient, index) {
       return (
-        <PatientListItem key={index.toString()} patient={patient} />
+        <PatientListItem key={index.toString()} patient={patient} index={index}/>
       );
     });
     this.setState({patientList: listItems})
@@ -56,18 +56,12 @@ class PatientList extends Component {
     }
 
   render(){
-    const styles = {
-      container: {
-        height: '200px',
-        overflowY: 'auto'
-      }
-    }
     return (
-      <div style={styles.container} ref='patientList'>
+      <div className="patient-list" ref='patientList'>
         <Infinite
-          elementHeight={10}
-          containerHeight={200}
-          infiniteLoadBeginEdgeOffset={10}
+          elementHeight={20}
+          containerHeight={500}
+          infiniteLoadBeginEdgeOffset={40}
           onInfiniteLoad={this._scroll}
           loadingSpinnerDelegate={this._elementInfiniteLoad()}
           isInfiniteLoading={this.state.isInfiniteLoading}
