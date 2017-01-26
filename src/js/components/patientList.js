@@ -3,6 +3,7 @@ import patientStore from '../stores/patientStore';
 import patientActions from '../actions/patientActions';
 import PatientListItem from './patientListItem';
 import Infinite from 'react-infinite';
+import { Link } from 'react-router';
 
 class PatientList extends Component {
   constructor(props){
@@ -57,8 +58,9 @@ class PatientList extends Component {
 
   render(){
     return (
-      <div className="patient-list" ref='patientList'>
-        <Infinite
+      <div className="patient-list-container" ref="patientList">
+        <Link className="link" to="new/">+ New Patient</Link>
+        <Infinite className="patient-list"
           elementHeight={20}
           containerHeight={500}
           infiniteLoadBeginEdgeOffset={40}

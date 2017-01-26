@@ -39,14 +39,13 @@ const patientStore = objectAssign({}, EventEmitter.prototype, {
     return  _store.selectedPatient;
   },
   updatePatient(patient){
-      let index = _store.patients.map(function(patient){return patient.id;}).indexOf(patient.id);
-      if(index === -1){return;}
-      _store.patients.splice(index, 1, patient);
+    let index = _store.patients.map(function(patient){return patient.id;}).indexOf(patient.id);
+    if(index === -1){return;}
+    _store.patients.splice(index, 1, patient);
   },
   removePatient(id){
     let index = _store.patients.map(function(patient){return patient.id;}).indexOf(id);
-    if(index === -1){return;}
-    _store.patients.splice(index, 1);
+    _store.patients = _store.patients.splice(index, 1);
   }
 });
 
@@ -65,9 +64,6 @@ AppDispatcher.register(function(payload){
       patientStore.emit(CHANGE_EVENT);
       break;
 
-    case patientConstants.ADD_PATIENT:
-      break;
-
     case patientConstants.UPDATE_PATIENT:
       setSelectedPatient('');
       patientStore.updatePatient(action.patient.body);
@@ -75,8 +71,14 @@ AppDispatcher.register(function(payload){
       break;
 
     case patientConstants.REMOVE_PATIENT:
+      patientStore.removePatient(action.id)
       patientStore.emit(CHANGE_EVENT)
       break;
+
+    case patientConstants.ADD_PATIENT:
+      patientActions.getPatients();
+      patientStore.emit(CHANGE_EVENT)
+      break
 
     default:
       return true;

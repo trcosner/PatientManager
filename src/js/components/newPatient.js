@@ -4,6 +4,7 @@ import PatientForm from './patientForm';
 import {hashHistory} from 'react-router';
 
 class NewPatient extends Component{
+
   _addPatient(event){
     event.preventDefault();
     let formData = this.refs.form.state;
@@ -23,10 +24,19 @@ class NewPatient extends Component{
   }
 
   render(){
+    const styles = {
+      container: {
+        margin: '25px'
+      }
+    }
     return(
-      <div>
-        <div>New Patient</div><br/>
-        <PatientForm ref="form" buttonAction={this._addPatient.bind(this)} buttonText={"Add"} id={this.props.params.id}/>
+      <div style={styles.container}>
+        <h3>New Patient</h3><br/>
+        <PatientForm
+          ref="form"
+          buttonAction={this._addPatient.bind(this)}
+          buttonText={'Add'}
+          id={this.props.params.id}/>
       </div>
     )
   }

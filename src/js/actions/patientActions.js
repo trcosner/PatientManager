@@ -38,17 +38,18 @@ const patientActions = {
       .addPatient(model)
       .then(function(){
         AppDispatcher.handleAction({
-          actionType: patientConstants.ADD_PATIENT
+          actionType: patientConstants.ADD_PATIENT,
+          patient: model
         });
       });
   },
   removePatient(id){
-    let patientId = id;
     patientApi
       .removePatient(id)
       .then(function(){
         AppDispatcher.handleAction({
           actionType: patientConstants.REMOVE_PATIENT,
+          id: id
         });
       });
   }

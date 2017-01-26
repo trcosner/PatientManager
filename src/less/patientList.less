@@ -1,15 +1,24 @@
-.patient-list {
-    height: 500px;
-    margin: 15px;
-    border: 2px #aaaaaa solid;
-    width: 1200px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 20px;
+.patient-list-container{
+  width: 750px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 25px;
+  .link {
+      color: #89cff0;
+      text-decoration: none;
+      margin-bottom: 5px;
+  }
 }
 
-.column {
-    width: 900px;
+.patient-list {
+    height: 500px;
+    border: 2px #aaaaaa solid;
+    margin-top: 10px;
+
+    .link {
+        color: #888888;
+        text-decoration: none;
+    }
 }
 
 .patient-list-item {
@@ -20,10 +29,30 @@
         color: #888888;
         text-decoration: none;
     }
-    &:hover { 
+
+    &:hover {
         .link {
             color: #000000;
             font-weight: bold;
-        } 
+        }
     }
+
+  .col{
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .col-sm{
+    width: 30px;
+  }
+
+  .col-md{
+    width: 120px;
+  }
+
+  .col-lg{
+    width: 240px;
+  }
 }

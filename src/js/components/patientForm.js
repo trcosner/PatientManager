@@ -30,7 +30,7 @@ class PatientForm extends Component{
         if(this.props.id){
             patientStore.removeChangeListener(this._onChange);
         }
-        
+
     }
 
     _onChange(){
@@ -52,32 +52,89 @@ class PatientForm extends Component{
         this.setState(change)
     }
 
+    _toggleGenderChange(gender){
+      this.setState({gender: gender});
+    }
+
     render(){
-        return (
-            <form onSubmit={this.props.buttonAction}>
-                <label>First Name</label><br/>
-                <input type={'text'} name={'first_name'} value={this.state.first_name} placeholder={'First Name'} onChange={this._handleInputChange.bind(this, 'first_name')}/><br/>
+      const styles = {
+          button: {
+            backgroundColor: 'blue',
+            color: 'white'
+          }
+      }
 
-                <label>Last Name</label><br/>
-                <input type={'text'} name={'last_name'} value={this.state.last_name} placeholder={'Last Name'} onChange={this._handleInputChange.bind(this, 'last_name')}/><br/>
-
-                <label>Email Address</label><br/>
-                <input type={'text'} name={'email'} value={this.state.email} placeholder={'Email Address'} onChange={this._handleInputChange.bind(this, 'email')}/><br/>
-
-                <label>Gender</label><br/>
-                <input type={'text'} name={'gender'} value={this.state.gender} placeholder={'gender'} onChange={this._handleInputChange.bind(this, 'gender')}/><br/>
-
-                <label>Street Address</label><br/>
-                <input type={'text'} name={'street_address'} value={this.state.street_address} placeholder={'street_address'} onChange={this._handleInputChange.bind(this, 'street_address')}/><br/>
-
-                <label>State</label><br/>
-                <input type={'text'} name={'state'} value={this.state.state} placeholder={'state'} onChange={this._handleInputChange.bind(this, 'state')}/><br/>
-
-                <label>Drug</label><br/>
-                <input type={'drug'} name={'drug'} value={this.state.drug} placeholder={'drug'} onChange={this._handleInputChange.bind(this, 'drug')}/><br/>
-                <button type='submit'>{this.props.buttonText}</button>
-            </form>
-        );
+      return (
+          <form onSubmit={this.props.buttonAction}>
+              <label>First Name</label><br/>
+              <input
+                type="text"
+                name="first_name"
+                value={this.state.first_name}
+                placeholder="First Name"
+                onChange={this._handleInputChange.bind(this, 'first_name')}/>
+                <br/>
+              <label>Last Name</label><br/>
+              <input
+                type="text"
+                name="last_name"
+                value={this.state.last_name}
+                placeholder="Last Name"
+                onChange={this._handleInputChange.bind(this, 'last_name')}/>
+                <br/>
+              <label>Email Address</label><br/>
+              <input
+                type="text"
+                name="email"
+                value={this.state.email}
+                placeholder="Email Address"
+                onChange={this._handleInputChange.bind(this, 'email')}/>
+                <br/>
+              <label>Male</label>
+              <input
+                type="radio"
+                name="male"
+                value="male"
+                checked={this.state.gender.toLowerCase() === 'male'}
+                onChange={this._toggleGenderChange.bind(this, 'male')}/>
+              <label>Female</label>
+              <input
+                type="radio"
+                name="female"
+                value="female"
+                checked={this.state.gender.toLowerCase() === 'female'}
+                onChange={this._toggleGenderChange.bind(this, 'female')}/>
+                <br/>
+              <label>Street Address</label><br/>
+              <input
+                type="text"
+                name="street_address"
+                value={this.state.street_address}
+                placeholder="street_address"
+                onChange={this._handleInputChange.bind(this, 'street_address')}/>
+                <br/>
+              <label>State</label><br/>
+              <input
+                type="text"
+                name="state"
+                value={this.state.state}
+                placeholder="state"
+                onChange={this._handleInputChange.bind(this, 'state')}/>
+                <br/>
+              <label>Drug</label><br/>
+              <input
+                type="drug"
+                name="drug"
+                value={this.state.drug}
+                placeholder="drug"
+                onChange={this._handleInputChange.bind(this, 'drug')}/>
+                <br/>
+              <button type="submit"
+                style={styles.button}
+                >{this.props.buttonText}
+              </button>
+          </form>
+      );
     }
 }
 

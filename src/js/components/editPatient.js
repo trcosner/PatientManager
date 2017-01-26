@@ -5,7 +5,7 @@ import PatientForm from './patientForm';
 import {hashHistory} from 'react-router';
 
 class EditPatient extends Component{
-  
+
   _updatePatient(event){
     event.preventDefault();
     let formData = this.refs.form.state;
@@ -29,16 +29,35 @@ class EditPatient extends Component{
       return;
     }
     patientActions.removePatient(this.props.params.id);
-    patientStore.removePatient(this.props.params.id);
     hashHistory.push('/');
   }
 
   render(){
+    const styles = {
+        button: {
+          backgroundColor: 'Red',
+          color: 'white',
+          marginBottom: '15px'
+        },
+        container: {
+          margin: '25px'
+        }
+      }
+
     return(
-      <div>
-        <div>Edit Patient</div><br/>
-        <button type='button' onClick={this._removePatient.bind(this)}>Delete</button>
-        <PatientForm ref="form" buttonAction={this._updatePatient.bind(this)} buttonText={"Update"} id={this.props.params.id}/>
+      <div style={styles.container}>
+        <h3>Edit Patient</h3><br/>
+        <button
+          type="button"
+          style={styles.button}
+          onClick={this._removePatient.bind(this)}
+        >Delete Patient
+        </button>
+        <PatientForm
+          ref="form"
+          buttonAction={this._updatePatient.bind(this)}
+          buttonText={'Update'}
+          id={this.props.params.id}/>
       </div>
     )
   }
