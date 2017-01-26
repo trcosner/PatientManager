@@ -24,7 +24,6 @@ The Patient Manager application accomplishes following goals:
 8 Bundled with webpack - available at https://trcosner.github.io/PatientManager/#/
 ```
 
-Leveraging Technologies:
 
 Download and extract the [latest version](https://github.com/trcosner/PatientManager).
 
